@@ -25,7 +25,7 @@ def getprice():
    return res.text
 
 @app.route('/geturl',methods=['GET'])
-def getprice():
+def geturl():
    tourl=request.args.get('tourl')
    url=str(base64.b64decode(tourl), 'utf-8')
    res=requests.get(url)
