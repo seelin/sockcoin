@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,request
 import os
 import time
 import requests
@@ -11,10 +11,11 @@ def hello_world():
    SK_CORPID = os.environ.get('SK_CORPID')
    return 'Hello World'+SK_CORPID
 
-@app.route('/getbal')
+@app.route('/getbal',methods=['GET'])
 def getbal():
    SK_ESTOKEN = os.environ.get('SK_ESTOKEN')
-   url="https://api.etherscan.io/api?module=account&action=balance&address=0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae&tag=latest&apikey="+SK_ESTOKEN
+   addr=request.args.get('addr')
+   url="https://api.etherscan.io/api?module=account&action=balance&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
    res=requests.get(url)
    rjson=res.json()
    return 'bal'+rjson['result']
