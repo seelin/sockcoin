@@ -3,26 +3,31 @@ import os
 import time
 import requests
 import json
+import base64
 app = Flask(__name__)
 SK_ESTOKEN=''
 
 @app.route('/')
 def hello_world():
-   SK_CORPID = os.environ.get('SK_CORPID')
    return 'Hello World'
-
+   
 @app.route('/getbal',methods=['GET'])
 def getbal():
-   SK_ESTOKEN = os.environ.get('SK_ESTOKEN')
    addr=request.args.get('addr')
    url="https://api.etherscan.io/api?module=account&action=balance&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
    res=requests.get(url)
-   rjson=res.json()
-   return 'bal'+rjson['result']
+   return res.text
 
 @app.route('/getprice',methods=['GET'])
 def getprice():
    url="https://api.etherscan.io/api?module=stats&action=ethprice&apikey="+SK_ESTOKEN
+   res=requests.get(url)
+   return res.text
+
+@app.route('/geturl',methods=['GET'])
+def getprice():
+   tourl=request.args.get('tourl')
+   url=str(base64.b64decode(tourl), 'utf-8')
    res=requests.get(url)
    return res.text
    
