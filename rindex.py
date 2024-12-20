@@ -41,7 +41,14 @@ def geturl():
    url=str(base64.b64decode(tourl), 'utf-8')
    res=requests.get(url)
    return res.text
-   
+@app.route('/getcac',methods=['GET'])
+
+def getcac():
+   host="redis://red-ctipejggph6c738b3u90"
+   r = redis.Redis(host, port=6379, db=0)
+   r.set('mykey', 'myvalue')
+   return r.get('mykey')
+
 if __name__ == '__main__':
    SK_ESTOKEN= os.environ.get('SK_ESTOKEN')
    app.run('0.0.0.0',82,True)
