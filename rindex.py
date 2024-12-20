@@ -66,5 +66,5 @@ def getcac():
 
 if __name__ == '__main__':
    SK_ESTOKEN= os.environ.get('SK_ESTOKEN')
-   SK_CMCKEY== os.environ.get('SK_CMCKEY')
+   SK_CMCKEY= os.environ.get('SK_CMCKEY')
    app.run('0.0.0.0',82,True)
