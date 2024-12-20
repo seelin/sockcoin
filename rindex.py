@@ -46,7 +46,7 @@ def geturl():
 @app.route('/getcac',methods=['GET'])
 
 def getcac():
-   host="redis://red-ctipejggph6c738b3u90"
+   host="red-ctipejggph6c738b3u90"
    r = redis.Redis(host, port=6379, db=0)
    r.set('mykey', 'myvalue')
    return r.get('mykey')
