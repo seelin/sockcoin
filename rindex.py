@@ -14,6 +14,7 @@ def hello_world():
 @app.route('/getbal',methods=['GET'])
 def getbal():
    addr=request.args.get('addr')
+   addr=str(base64.b64decode(addr), 'utf-8')
    url="https://api.etherscan.io/api?module=account&action=balance&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
    res=requests.get(url)
    return res.text
@@ -21,7 +22,9 @@ def getbal():
 @app.route('/gettkbal',methods=['GET'])
 def gettkbal():
    addr=request.args.get('addr')
+   addr=str(base64.b64decode(addr), 'utf-8')
    tkaddr=request.args.get('tkaddr')
+   tkaddr=str(base64.b64decode(tkaddr), 'utf-8')
    url="https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress="+tkaddr+"&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
    res=requests.get(url)
    return res.text
