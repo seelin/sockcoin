@@ -44,8 +44,20 @@ def geturl():
    url=str(base64.b64decode(tourl), 'utf-8')
    res=requests.get(url)
    return res.text
-@app.route('/getcac',methods=['GET'])
 
+@app.route('/getcmcurl',methods=['GET'])
+def getcmcurl():
+   parameters = {'start':'1','limit':'5000','convert':'USD'}
+   headers = {'Accepts': 'application/json','X-CMC_PRO_API_KEY': SK_CMCKEY}
+   tourl=request.args.get('tourl')
+   url=str(base64.b64decode(tourl), 'utf-8')
+   url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+   session = requests.Session()
+   session.headers.update(headers)
+   res=session.get(url,params=parameters)
+   return res.text
+   
+@app.route('/getcac',methods=['GET'])
 def getcac():
    host="red-ctipejggph6c738b3u90"
    r = redis.Redis(host, port=6379, db=0)
