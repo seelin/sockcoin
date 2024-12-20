@@ -47,11 +47,21 @@ def geturl():
 
 @app.route('/getcmcurl',methods=['GET'])
 def getcmcurl():
-   parameters = {'start':'1','limit':'5000','convert':'USD'}
    headers = {'Accepts': 'application/json','X-CMC_PRO_API_KEY': SK_CMCKEY}
    tourl=request.args.get('tourl')
-   url=str(base64.b64decode(tourl), 'utf-8')
-   url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+   if tourl=='':
+      tourl='/v1/cryptocurrency/listings/latest'
+   else:
+      tourl=str(base64.b64decode(tourl), 'utf-8')
+      
+   partxt=request.args.get('partxt')
+   if partxt=='':
+      parameters = {'start':'1','limit':'5000','convert':'USD'}
+   else:
+      partxt=str(base64.b64decode(partxt), 'utf-8')
+      parameters=json.loads(partxt)
+      
+   url = 'https://pro-api.coinmarketcap.com'+tourl
    session = requests.Session()
    session.headers.update(headers)
    res=session.get(url,params=parameters)
