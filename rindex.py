@@ -4,6 +4,8 @@ import time
 import requests
 import json
 import base64
+import redis
+
 app = Flask(__name__)
 SK_ESTOKEN=''
 
