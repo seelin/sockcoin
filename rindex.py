@@ -5,6 +5,7 @@ import requests
 import json
 import base64
 import redis
+import logging
 
 app = Flask(__name__)
 SK_ESTOKEN=''
@@ -64,6 +65,9 @@ def getcmcurl():
    print(tourl)
    print(partxt)
    print(parameters)
+   
+   app.logger.info('partxt:%s', tourl)
+   app.logger.info('partxt:%s', partxt)
    
    url = 'https://pro-api.coinmarketcap.com'+tourl
    session = requests.Session()
