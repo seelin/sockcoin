@@ -57,7 +57,7 @@ def getcmcurl():
       
    partxt=request.args.get('partxt')
    if partxt=='':
-      parameters = {'start':'1','limit':'5000','convert':'USD'}
+      parameters = {}
    else:
       partxt=str(base64.b64decode(partxt), 'utf-8')
       parameters=json.loads(partxt)
