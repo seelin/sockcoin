@@ -71,6 +71,7 @@ def getcmcurl():
    session = requests.Session()
    session.headers.update(headers)
    res=session.get(url,params=parameters)
+   app.logger.info('res.text:%s', res.text)
    return res.text
    
 @app.route('/getcac',methods=['GET'])
