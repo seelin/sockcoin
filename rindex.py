@@ -64,9 +64,10 @@ def getcmcurl():
       
    url = 'https://pro-api.coinmarketcap.com'+tourl
    
-   app.logger.info('partxt:%s', tourl)
+   app.logger.info('tourl:%s', tourl)
    app.logger.info('partxt:%s', partxt)
    app.logger.info('parameters:%s', parameters)
+   app.logger.info('url:%s', url)
    
    session = requests.Session()
    session.headers.update(headers)
