@@ -60,9 +60,11 @@ def getcmcurl():
    else:
       partxt=str(base64.b64decode(partxt), 'utf-8')
       parameters=json.loads(partxt)
+      
    print(tourl)
    print(partxt)
    print(parameters)
+   
    url = 'https://pro-api.coinmarketcap.com'+tourl
    session = requests.Session()
    session.headers.update(headers)
