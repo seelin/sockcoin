@@ -84,7 +84,7 @@ def getcac():
    return r.get('mykey')
    
 @app.route('/getexcrate',methods=['GET'])
-def get_exchange_rate(self,curr='USD'):
+def get_exchange_rate():
    curr=request.args.get('curr')
    if curr!='':
        curr=str(base64.b64decode(curr), 'utf-8')
