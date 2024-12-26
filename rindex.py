@@ -10,6 +10,7 @@ import logging
 app = Flask(__name__)
 SK_ESTOKEN=''
 SK_CMCKEY=''
+SK_EXCKEY=''
 
 @app.route('/')
 def hello_world():
@@ -81,8 +82,21 @@ def getcac():
    r = redis.Redis(host, port=6379, db=0)
    r.set('mykey', 'myvalue')
    return r.get('mykey')
-
+   
+@app.route('/getexcrate',methods=['GET'])
+def get_exchange_rate(self,curr='USD'):
+   curr=request.args.get('curr')
+   if curr!='':
+       curr=str(base64.b64decode(curr), 'utf-8')
+       curr=curr.upper()
+   else:
+       curr='USD'
+   url = 'https://v6.exchangerate-api.com/v6/'+SK_EXCKEY+'/latest/'+curr
+   res = requests.get(url)
+   return res.text
+   
 if __name__ == '__main__':
    SK_ESTOKEN= os.environ.get('SK_ESTOKEN')
    SK_CMCKEY= os.environ.get('SK_CMCKEY')
+   SK_EXCKEY= os.environ.get('SK_EXCKEY')
    app.run('0.0.0.0',82,True)
