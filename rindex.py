@@ -95,6 +95,16 @@ def get_exchange_rate():
    res = requests.get(url)
    return res.text
    
+@app.route('/getlist',methods=['GET'])   
+def getlist():
+   flestr="/etc/secrets/list.txt"
+   i=0
+   with open(flestr, 'r') as file:
+   for line in file:
+       i=i+1
+       if(i>10):break;
+       print(line.strip())
+   
 if __name__ == '__main__':
    SK_ESTOKEN= os.environ.get('SK_ESTOKEN')
    SK_CMCKEY= os.environ.get('SK_CMCKEY')
