@@ -99,11 +99,15 @@ def get_exchange_rate():
 def getlist():
    flestr="/etc/secrets/list.txt"
    i=0
+   lrsp=""
    with open(flestr, 'r') as file:
        for line in file:
            i=i+1
-           if(i>10):break;
-           print(line.strip())
+           if(i>10):break
+           addr=line.strip()
+           lrsp=lrsp+'<br>'+addr
+           print(addr)
+   return lrsp
    
 if __name__ == '__main__':
    SK_ESTOKEN= os.environ.get('SK_ESTOKEN')
