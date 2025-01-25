@@ -100,10 +100,10 @@ def getlist():
    flestr="/etc/secrets/list.txt"
    i=0
    with open(flestr, 'r') as file:
-   for line in file:
-       i=i+1
-       if(i>10):break;
-       print(line.strip())
+       for line in file:
+           i=i+1
+           if(i>10):break;
+           print(line.strip())
    
 if __name__ == '__main__':
    SK_ESTOKEN= os.environ.get('SK_ESTOKEN')
