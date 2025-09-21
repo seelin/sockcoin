@@ -15,13 +15,15 @@ ES_HOST = "https://api.etherscan.io/v2/api"
 
 @app.route('/')
 def hello_world():
-   return 'Hello World'
+   chainid=request.args.get('chainid','1')
+   return f'Hello World,{chainid}'
    
 @app.route('/getbal',methods=['GET'])
 def getbal():
    addr=request.args.get('addr')
    addr=str(base64.b64decode(addr), 'utf-8')
-   url=ES_HOST+"?chainid=1&module=account&action=balance&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
+   chainid=request.args.get('chainid','1')
+   url=ES_HOST+"?chainid="+chainid+"&module=account&action=balance&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
    res=requests.get(url)
    return res.text
    
@@ -31,13 +33,15 @@ def gettkbal():
    addr=str(base64.b64decode(addr), 'utf-8')
    tkaddr=request.args.get('tkaddr')
    tkaddr=str(base64.b64decode(tkaddr), 'utf-8')
-   url=ES_HOST+"?chainid=1&module=account&action=tokenbalance&contractaddress="+tkaddr+"&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
+   chainid=request.args.get('chainid','1')
+   url=ES_HOST+"?chainid="+chainid+"&module=account&action=tokenbalance&contractaddress="+tkaddr+"&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
    res=requests.get(url)
    return res.text
 
 @app.route('/getprice',methods=['GET'])
 def getprice():
-   url=ES_HOST+"?chainid=1&module=stats&action=ethprice&apikey="+SK_ESTOKEN
+   chainid=request.args.get('chainid','1')
+   url=ES_HOST+"?chainid="+chainid+"&module=stats&action=ethprice&apikey="+SK_ESTOKEN
    res=requests.get(url)
    return res.text
 
