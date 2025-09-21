@@ -118,4 +118,5 @@ if __name__ == '__main__':
    SK_ESTOKEN= os.environ.get('SK_ESTOKEN')
    SK_CMCKEY= os.environ.get('SK_CMCKEY')
    SK_EXCKEY= os.environ.get('SK_EXCKEY')
-   app.run('0.0.0.0',82,True)
+   SK_PORT= os.environ.get('SK_PORT','82')
+   app.run('0.0.0.0',SK_PORT,True)
