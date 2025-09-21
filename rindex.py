@@ -11,6 +11,7 @@ app = Flask(__name__)
 SK_ESTOKEN=''
 SK_CMCKEY=''
 SK_EXCKEY=''
+ES_HOST = "https://api.etherscan.io/v2/api"
 
 @app.route('/')
 def hello_world():
@@ -20,7 +21,7 @@ def hello_world():
 def getbal():
    addr=request.args.get('addr')
    addr=str(base64.b64decode(addr), 'utf-8')
-   url="https://api.etherscan.io/api?module=account&action=balance&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
+   url=ES_HOST+"?chainid=1&module=account&action=balance&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
    res=requests.get(url)
    return res.text
    
@@ -30,13 +31,13 @@ def gettkbal():
    addr=str(base64.b64decode(addr), 'utf-8')
    tkaddr=request.args.get('tkaddr')
    tkaddr=str(base64.b64decode(tkaddr), 'utf-8')
-   url="https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress="+tkaddr+"&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
+   url=ES_HOST+"?chainid=1&module=account&action=tokenbalance&contractaddress="+tkaddr+"&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
    res=requests.get(url)
    return res.text
 
 @app.route('/getprice',methods=['GET'])
 def getprice():
-   url="https://api.etherscan.io/api?module=stats&action=ethprice&apikey="+SK_ESTOKEN
+   url=ES_HOST+"?chainid=1&module=stats&action=ethprice&apikey="+SK_ESTOKEN
    res=requests.get(url)
    return res.text
 
