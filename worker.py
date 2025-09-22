@@ -1,9 +1,9 @@
-import jinja2
+#import jinja2
 from fastapi import FastAPI, Request
 from workers import WorkerEntrypoint
 
-environment = jinja2.Environment()
-template = environment.from_string("Hello, {{ name }}!")
+#environment = jinja2.Environment()
+#template = environment.from_string("Hello, {{ name }}!")
 
 
 class Default(WorkerEntrypoint):
@@ -24,7 +24,8 @@ async def root():
 
 @app.get("/hi/{name}")
 async def say_hi(name: str):
-    message = template.render(name=name)
+    #message = template.render(name=name)
+    message = "message test"
     return {"message": message}
 
 
