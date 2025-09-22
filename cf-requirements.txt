@@ -1,3 +1,4 @@
+requests
 webtypy
 fastapi
 markupsafe
