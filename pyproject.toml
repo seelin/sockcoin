@@ -1,5 +1,5 @@
 [project]
-name = "fastapi-worker"
+name = "sockcoin"
 version = "0.1.0"
 description = "Python fastapi example"
 readme = "README.md"
