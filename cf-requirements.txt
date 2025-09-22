@@ -1,1 +1,4 @@
-
+webtypy
+fastapi
+markupsafe
+jinja2
