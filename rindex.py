@@ -13,6 +13,15 @@ SK_CMCKEY=''
 SK_EXCKEY=''
 ES_HOST = "https://api.etherscan.io/v2/api"
 
+def is_base64(s):
+    try:
+        if isinstance(s, str):
+            s = s.encode()
+        base64.b64decode(s, validate=True)
+        return True
+    except base64.binascii.Error:
+        return False
+       
 @app.route('/')
 def hello_world():
    chainid=request.args.get('chainid','1')
@@ -21,6 +30,7 @@ def hello_world():
 @app.route('/getbal',methods=['GET'])
 def getbal():
    addr=request.args.get('addr')
+   if !is_base(addr): return 'addr error'
    addr=str(base64.b64decode(addr), 'utf-8')
    chainid=request.args.get('chainid','1')
    url=ES_HOST+"?chainid="+chainid+"&module=account&action=balance&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
@@ -30,8 +40,10 @@ def getbal():
 @app.route('/gettkbal',methods=['GET'])
 def gettkbal():
    addr=request.args.get('addr')
+   if !is_base(addr): return 'addr error'
    addr=str(base64.b64decode(addr), 'utf-8')
    tkaddr=request.args.get('tkaddr')
+   if !is_base(tkaddr): return 'tkaddr error'
    tkaddr=str(base64.b64decode(tkaddr), 'utf-8')
    chainid=request.args.get('chainid','1')
    url=ES_HOST+"?chainid="+chainid+"&module=account&action=tokenbalance&contractaddress="+tkaddr+"&address="+addr+"&tag=latest&apikey="+SK_ESTOKEN
@@ -48,6 +60,7 @@ def getprice():
 @app.route('/geturl',methods=['GET'])
 def geturl():
    tourl=request.args.get('tourl')
+   if !is_base(tourl): return 'tourl error'
    url=str(base64.b64decode(tourl), 'utf-8')
    res=requests.get(url)
    return res.text
@@ -59,12 +72,14 @@ def getcmcurl():
    if tourl=='':
       tourl='/v1/cryptocurrency/listings/latest'
    else:
+      if !is_base(tourl): return 'tourl error'
       tourl=str(base64.b64decode(tourl), 'utf-8')
       
    partxt=request.args.get('partxt')
    if partxt=='':
       parameters = {}
    else:
+      if !is_base(partxt): return 'partxt error'
       partxt=str(base64.b64decode(partxt), 'utf-8')
       parameters=json.loads(partxt)
       
@@ -91,6 +106,7 @@ def getcac():
 @app.route('/getexcrate',methods=['GET'])
 def get_exchange_rate():
    curr=request.args.get('curr')
+   if !is_base(curr): return 'curr error'
    if curr!='':
        curr=str(base64.b64decode(curr), 'utf-8')
        curr=curr.upper()
